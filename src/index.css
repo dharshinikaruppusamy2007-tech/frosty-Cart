@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cream: #FFF8F0;
+  --color-cream-dark: #F5E6D3;
+  --color-lavender: #E8D5F5;
+  --color-lavender-dark: #C9A8E8;
+  --color-pink: #F5C6D0;
+  --color-pink-dark: #E899A8;
+  --color-purple: #9B59B6;
+  --color-purple-dark: #7D3C98;
+  --color-purple-light: #D7BDE2;
+  --color-berry: #C0392B;
+  --color-mint: #A8E6CF;
+  --color-peach: #FFDAB9;
+  --color-vanilla: #FFF9E3;
+  --color-chocolate: #5C3317;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--color-cream);
+    color: #2D2D2D;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+}
+
+@layer utilities {
+  .gradient-purple {
+    background: linear-gradient(135deg, var(--color-purple), var(--color-purple-dark));
+  }
+
+  .gradient-pink {
+    background: linear-gradient(135deg, var(--color-pink), var(--color-lavender));
+  }
+
+  .gradient-hero {
+    background: linear-gradient(135deg, var(--color-lavender) 0%, var(--color-pink) 50%, var(--color-peach) 100%);
+  }
+
+  .gradient-cta {
+    background: linear-gradient(135deg, var(--color-purple) 0%, #E74C8B 50%, var(--color-pink-dark) 100%);
+  }
+
+  .card-shadow {
+    box-shadow: 0 4px 20px rgba(155, 89, 182, 0.1);
+  }
+
+  .card-shadow-hover {
+    box-shadow: 0 8px 30px rgba(155, 89, 182, 0.2);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-purple), var(--color-purple-dark));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
