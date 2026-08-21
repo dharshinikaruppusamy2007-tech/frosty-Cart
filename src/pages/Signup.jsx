@@ -34,12 +34,12 @@ const Signup = () => {
                 })
             });
 
-            const data = await res.json();
+            const data = await res.json().catch(() => ({}));
             if (res.ok) {
                 setSuccess('Registration successful! Redirecting...');
                 setTimeout(() => navigate('/login', { state: { from: from === '/login' ? '/' : from } }), 2000);
             } else {
-                setError(data.message || 'Registration failed');
+                setError(data.message || `Registration failed (${res.status})`);
             }
         } catch (err) {
             setError('Server error. Please try again.');

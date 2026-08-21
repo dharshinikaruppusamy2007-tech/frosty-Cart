@@ -14,14 +14,22 @@ const generateToken = (id) => {
 // @access  Public
 const registerUser = async (req, res) => {
     try {
-        const { name, email, phone, password } = req.body;
+        const name = typeof req.body.name === 'string' ? req.body.name.trim() : '';
+        const email = typeof req.body.email === 'string' ? req.body.email.trim().toLowerCase() : '';
+        const phone = typeof req.body.phone === 'string' ? req.body.phone.trim() : '';
+        const password = req.body.password;
 
         if (!name || !email || !phone || !password) {
             return res.status(400).json({ message: 'Please fill all required fields' });
         }
 
-        // Check if user exists
-        const userExists = await User.findOne({ email });
+        if (password.length < 6) {
+            return res.status(400).json({ message: 'Password must be at least 6 characters' });
+        }
+
+        // Check if user exists (case-insensitive so John@x.com and john@x.com collide)
+        const escapedEmail = email.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const userExists = await User.findOne({ email: { $regex: `^${escapedEmail}$`, $options: 'i' } });
         if (userExists) {
             return res.status(400).json({ message: 'Email already registered' });
         }
@@ -51,6 +59,9 @@ const registerUser = async (req, res) => {
             res.status(400).json({ message: 'Invalid user data' });
         }
     } catch (error) {
+        if (error.code === 11000) {
+            return res.status(400).json({ message: 'Email already registered' });
+        }
         res.status(500).json({ message: error.message });
     }
 };
@@ -60,13 +71,19 @@ const registerUser = async (req, res) => {
 // @access  Public
 const loginUser = async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const email = typeof req.body.email === 'string' ? req.body.email.trim().toLowerCase() : '';
+        const password = req.body.password;
 
         if (!email || !password) {
             return res.status(400).json({ message: 'Please fill all required fields' });
         }
 
-        const user = await User.findOne({ email });
+        let user = await User.findOne({ email });
+        if (!user) {
+            // Tolerate legacy accounts stored with different email casing
+            const escapedEmail = email.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            user = await User.findOne({ email: { $regex: `^${escapedEmail}$`, $options: 'i' } });
+        }
         if (!user) {
             return res.status(400).json({ message: 'Invalid email or password' });
         }
