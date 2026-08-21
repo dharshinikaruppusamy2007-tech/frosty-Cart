@@ -3,7 +3,7 @@ import { useAuth } from './AuthContext';
 
 const CartContext = createContext();
 
-const API = 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL;
 
 export const CartProvider = ({ children }) => {
     const { user, token } = useAuth();

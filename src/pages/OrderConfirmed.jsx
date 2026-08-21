@@ -5,7 +5,7 @@ import { CheckCircle, Package, MapPin, CreditCard, Calendar, Tag, Download, Prin
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
-const API = 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL;
 
 const OrderConfirmed = () => {
     const { orderId } = useParams();

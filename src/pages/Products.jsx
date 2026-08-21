@@ -33,7 +33,7 @@ const Products = () => {
                 if (minPrice) params.append('minPrice', minPrice);
                 if (maxPrice) params.append('maxPrice', maxPrice);
 
-                const url = `http://localhost:5000/api/products${params.toString() ? '?' + params.toString() : ''}`;
+                const url = `${import.meta.env.VITE_API_URL}/api/products${params.toString() ? '?' + params.toString() : ''}`;
                 const res = await fetch(url);
                 if (!res.ok) throw new Error('Failed to fetch products');
                 const data = await res.json();
@@ -50,7 +50,7 @@ const Products = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/products/categories');
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/categories`);
                 if (res.ok) {
                     const data = await res.json();
                     setCategories(data);

@@ -10,7 +10,7 @@ const AdminOrders = () => {
     useEffect(() => {
         const fetchOrders = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/admin/orders', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/orders`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.ok) setOrders(await res.json());

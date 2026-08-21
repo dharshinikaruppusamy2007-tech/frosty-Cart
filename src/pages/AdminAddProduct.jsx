@@ -16,7 +16,7 @@ const AdminAddProduct = () => {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const res = await fetch('http://localhost:5000/api/admin/categories', {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/categories`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.ok) setCategories(await res.json());
@@ -36,7 +36,7 @@ const AdminAddProduct = () => {
         setLoading(true);
 
         try {
-            const res = await fetch('http://localhost:5000/api/admin/products', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/products`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

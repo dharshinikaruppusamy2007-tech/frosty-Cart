@@ -19,10 +19,10 @@ const AdminEditProduct = () => {
         const fetchData = async () => {
             try {
                 const [prodRes, catRes] = await Promise.all([
-                    fetch(`http://localhost:5000/api/admin/products/${id}`, {
+                    fetch(`${import.meta.env.VITE_API_URL}/api/admin/products/${id}`, {
                         headers: { Authorization: `Bearer ${token}` }
                     }),
-                    fetch('http://localhost:5000/api/admin/categories', {
+                    fetch(`${import.meta.env.VITE_API_URL}/api/admin/categories`, {
                         headers: { Authorization: `Bearer ${token}` }
                     })
                 ]);
@@ -60,7 +60,7 @@ const AdminEditProduct = () => {
         setSaving(true);
 
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/products/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/products/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -17,7 +17,7 @@ const AdminOrderDetails = () => {
     useEffect(() => {
         const fetchOrder = async () => {
             try {
-                const res = await fetch(`http://localhost:5000/api/admin/orders/${orderId}`, {
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/orders/${orderId}`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 if (res.ok) {
@@ -39,7 +39,7 @@ const AdminOrderDetails = () => {
         setMessage('');
 
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/orders/${orderId}/status`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/orders/${orderId}/status`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

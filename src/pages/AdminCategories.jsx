@@ -17,7 +17,7 @@ const AdminCategories = () => {
 
     const fetchCategories = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/admin/categories', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/categories`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.ok) setCategories(await res.json());
@@ -36,7 +36,7 @@ const AdminCategories = () => {
         setSuccess('');
 
         try {
-            const res = await fetch('http://localhost:5000/api/admin/categories', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/categories`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const AdminCategories = () => {
         setSuccess('');
 
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/categories/${editId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/categories/${editId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const AdminCategories = () => {
     const handleDelete = async (id) => {
         setDeleteError('');
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/categories/${id}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/categories/${id}`, {
                 method: 'DELETE',
                 headers: { Authorization: `Bearer ${token}` }
             });

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Package, MapPin, CreditCard, Calendar, ShoppingBag, ChevronDown, ChevronUp, Tag, Download } from 'lucide-react';
 
-const API = 'http://localhost:5000';
+const API = import.meta.env.VITE_API_URL;
 
 const statusColors = {
     Confirmed: 'bg-blue-100 text-blue-700',

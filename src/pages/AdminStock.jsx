@@ -11,7 +11,7 @@ const AdminStock = () => {
 
     const fetchProducts = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/admin/stock', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/stock`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             if (res.ok) setProducts(await res.json());
@@ -27,7 +27,7 @@ const AdminStock = () => {
     const handleUpdateStock = async (productId) => {
         setUpdating(true);
         try {
-            const res = await fetch(`http://localhost:5000/api/admin/stock/${productId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/api/admin/stock/${productId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
